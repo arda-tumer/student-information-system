@@ -1,0 +1,8 @@
+# Build directories
+build/
+
+# Compiled files
+*.o
+*.a
+*.so
+*.exe
