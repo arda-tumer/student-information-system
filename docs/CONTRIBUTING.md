@@ -1,3 +1,4 @@
+```markdown
 # Contribution Guidelines
 
 This document defines the contribution ruleset for the **Student Information System** project.
