@@ -1,3 +1,4 @@
+ HEAD
 # Build directories
 build/
 
@@ -6,3 +7,31 @@ build/
 *.a
 *.so
 *.exe
+# Build output
+build/
+
+# CMake generated files
+CMakeFiles/
+CMakeCache.txt
+Makefile
+cmake_install.cmake
+
+# Compiled binaries
+*.o
+*.out
+app
+Main
+
+# Editor files
+.vscode/
+build/
+CMakeFiles/
+CMakeCache.txt
+Makefile
+cmake_install.cmake
+*.o
+*.out
+app
+Main
+.vscode/
+>>>>>>> a042411 (Initial C++ student information system)
