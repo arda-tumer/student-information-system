@@ -1,5 +1,5 @@
 ---
-name: "[TITLE]"
+name: "[ISSUE]"
 about: "[Describe this issue template's purpose here, ex. [Project planning, documentation,
   coordination, and review tasks]]"
 title: ''
