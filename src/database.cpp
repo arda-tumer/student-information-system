@@ -1,19 +1,9 @@
-#ifndef DATABASE_H
-#define DATABASE_H
+#include "database.h"
 
-#include <pqxx/pqxx>
-#include <string>
+Database::Database() {
+    // database starts empty
+}
 
-class Database {
-public:
-   
-    Database(const std::string &conninfo);
-
-    
-    pqxx::connection& getConn();
-
-private:
-    pqxx::connection conn;
-};
-
-#endif
+std::vector<Student>& Database::getStudents() {
+    return students;
+}

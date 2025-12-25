@@ -1,58 +1,89 @@
 #include "student.h"
 #include <iostream>
 
-void StudentManager::add(pqxx::connection &c, const std::string &name,
-                         const std::string &surname, const std::string &dept,
-                         const std::string &email)
-{
-    pqxx::work w(c);
+void StudentManager::addStudent(Database &db) {
+    Student s;
+    auto &list = db.getStudents();
 
-    w.exec_params(
-        "INSERT INTO students(name, surname, department, email) "
-        "VALUES ($1, $2, $3, $4)",
-        name, surname, dept, email
-    );
+    // simple id generation
+    s.id = list.size() + 1;
 
-    w.commit();
-    std::cout << "Student added.\n";
+    std::cout << "Enter name: ";
+    std::cin >> s.name;
+
+    std::cout << "Enter surname: ";
+    std::cin >> s.surname;
+
+    std::cout << "Enter department: ";
+    std::cin >> s.department;
+
+    std::cout << "Enter email: ";
+    std::cin >> s.email;
+
+    list.push_back(s);
+    std::cout << "Student added successfully.\n";
 }
 
-void StudentManager::listAll(pqxx::connection &c)
-{
-    pqxx::nontransaction n(c);
-    auto r = n.exec("SELECT * FROM students ORDER BY id");
+void StudentManager::listStudents(Database &db) {
+    auto &list = db.getStudents();
 
-    std::cout << "\n--- Student List ---\n";
-    for (auto row : r) {
-        std::cout << row["id"].as<int>() << " | "
-                  << row["name"].as<std::string>() << " "
-                  << row["surname"].as<std::string>() << " | "
-                  << row["department"].as<std::string>() << " | "
-                  << row["email"].as<std::string>() << "\n";
+    if (list.empty()) {
+        std::cout << "No students available.\n";
+        return;
+    }
+
+    for (int i = 0; i < list.size(); i++) {
+        std::cout << list[i].id << " | "
+                  << list[i].name << " "
+                  << list[i].surname << " | "
+                  << list[i].department << " | "
+                  << list[i].email << "\n";
     }
 }
 
-void StudentManager::update(pqxx::connection &c, int id,
-                            const std::string &name, const std::string &surname,
-                            const std::string &dept, const std::string &email)
-{
-    pqxx::work w(c);
+void StudentManager::updateStudent(Database &db) {
+    int id;
+    auto &list = db.getStudents();
 
-    w.exec_params(
-        "UPDATE students SET name=$1, surname=$2, department=$3, email=$4 "
-        "WHERE id=$5",
-        name, surname, dept, email, id
-    );
+    std::cout << "Enter student ID to update: ";
+    std::cin >> id;
 
-    w.commit();
-    std::cout << "Student updated.\n";
+    for (int i = 0; i < list.size(); i++) {
+        if (list[i].id == id) {
+            std::cout << "New name: ";
+            std::cin >> list[i].name;
+
+            std::cout << "New surname: ";
+            std::cin >> list[i].surname;
+
+            std::cout << "New department: ";
+            std::cin >> list[i].department;
+
+            std::cout << "New email: ";
+            std::cin >> list[i].email;
+
+            std::cout << "Student updated.\n";
+            return;
+        }
+    }
+
+    std::cout << "Student not found.\n";
 }
 
-void StudentManager::remove(pqxx::connection &c, int id)
-{
-    pqxx::work w(c);
-    w.exec_params("DELETE FROM students WHERE id=$1", id);
-    w.commit();
+void StudentManager::deleteStudent(Database &db) {
+    int id;
+    auto &list = db.getStudents();
 
-    std::cout << "Student deleted.\n";
+    std::cout << "Enter student ID to delete: ";
+    std::cin >> id;
+
+    for (int i = 0; i < list.size(); i++) {
+        if (list[i].id == id) {
+            list.erase(list.begin() + i);
+            std::cout << "Student deleted.\n";
+            return;
+        }
+    }
+
+    std::cout << "Student not found.\n";
 }

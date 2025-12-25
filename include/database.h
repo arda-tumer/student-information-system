@@ -1,18 +1,27 @@
 #ifndef DATABASE_H
-#define DATABASE.H
+#define DATABASE_H
 
-#include <pqxx/pqxx>
+#include <vector>
 #include <string>
+
+// simple struct for student data
+struct Student {
+    int id;
+    std::string name;
+    std::string surname;
+    std::string department;
+    std::string email;
+};
 
 class Database {
 public:
-    Database(const std::string& conninfo);
-    pqxx::connection& getConnection();
+    Database();
 
+    // gives access to stored students
+    std::vector<Student>& getStudents();
 
 private:
-    pqxx::connection conn;
-
+    std::vector<Student> students;
 };
 
 #endif
