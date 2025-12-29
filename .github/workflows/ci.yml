@@ -22,12 +22,13 @@ jobs:
         sudo apt update
         sudo apt install -y --no-install-recommends g++ cmake libpqxx-dev
 
-    - name: build C++ application
-      run: |
-        mkdir -p build
-        cd build
-        cmake ..
-        make
+# Application build does not required at this stage. Commented until it's needed.
+        #    - name: build C++ application
+    #      run: |
+        #        mkdir -p build
+        #        cd build
+        #        cmake ..
+        #        make
 
     - name: build Docker images
       run: |
