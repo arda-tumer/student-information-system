@@ -34,7 +34,7 @@ docker compose up
 ```
 Successful startup is confirmed when PostgreSQL logs show:
 
-```text
+```pssql
 database system is ready to accept connections
 ```
 ## System Architecture
@@ -54,28 +54,40 @@ The system consists of two main containers:
 ```text
 student-information-system/
 ├── .github/
+│   ├── ISSUE_TEMPLATE/   # Issue templates
+│   ├── templates/        # Other templates 
 │   └── workflows/        # GitHub Actions CI/CD pipelines
-├── include/              # C++ header files (.h, .hpp)
-├── src/                  # C++ source files (.cpp)
+├── include/              # Header files
+├── src/                  # Source files
 ├── tests/                # Unit and integration tests
 ├── docker/               # Docker-related files
 │   ├── Dockerfile        # C++ application container
 │   ├── Dockerfile.db     # PostgreSQL container
-│   ├── docker-compose.yml
-│   ├── .dockerignore
+│   ├── docker.env        # Docker environment variables
 │   └── init.sql          # Initial database schema
 ├── docs/                 # Project documentation
 ├── CONTRIBUTING.md       # Contribution guidelines
+├── docker-compose.yml    # Container orchestration
+├── .dockerignore
 ├── LICENSE               # MIT License
 └── README.md             # Project overview
 ```
+---
+
+## Documentation
+
+Additional documentation:
+- Contribution Guide: [CONTRIBUTING.md](https://github.com/arda-tumer/student-information-system/blob/main/docs/CONTRIBUTING.md)
+
+---
+
 ## License
 
 This project is licensed under the MIT License.
-```text
+```vbnet
 MIT License
 
-Copyright (c) 2026
+Copyright (c) 2025 Arda Tümer
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -87,5 +99,12 @@ furnished to do so, subject to the following conditions:
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
 ```
