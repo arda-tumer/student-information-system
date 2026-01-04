@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  db:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.db
+    container_name: postgres_db
+    env_file:
+      - docker/docker.env
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: cpp_app
+    depends_on:
+      - db
+    env_file:
+      - docker/docker.env
+
+volumes:
+  db_data:
+
+

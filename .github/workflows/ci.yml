@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: CI
 
 on:
   push:
@@ -20,7 +20,7 @@ jobs:
     - name: C++ dependencies install
       run: |
         sudo apt update
-        sudo apt install -y --no-install-recommends g++ cmake libpqxx-dev
+        sudo apt install -y g++ cmake libpqxx-dev
 
     - name: build C++ application
       run: |
@@ -28,7 +28,3 @@ jobs:
         cd build
         cmake ..
         make
-
-    - name: build Docker images
-      run: |
-        docker compose build
