@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image Build
 
 on:
   push:
@@ -12,12 +12,40 @@ on:
 jobs:
 
   build:
-  
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-    - name: build Docker images
-      run: |
-        docker compose build
+      - name: Validate Docker Compose
+        run: docker compose config
+
+      - name: Build Docker images
+        run: docker compose build
+
+      - name: Start containers
+        run: docker compose up -d
+
+      - name: Check PostgreSQL health
+        run: |
+          for i in {1..10}; do
+            STATUS=$(docker inspect --format='{{.State.Health.Status}}' postgres_db || echo "starting")
+            echo "Postgres status: $STATUS"
+            if [ "$STATUS" = "healthy" ]; then
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "Postgres failed to become healthy"
+          docker compose logs
+          exit 1
+
+      - name: Show container logs
+        run: docker compose logs
+
+      - name: Shutdown containers
+        run: docker compose down
