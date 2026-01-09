@@ -29,6 +29,7 @@ COPY include/ ./include/
 COPY src/ ./src/
 COPY CMakeLists.txt .
 
+
 # Build application.
 RUN cmake -S . -B build && \
     cmake --build build
@@ -41,9 +42,10 @@ RUN addgroup --system appgroup && \
 USER appuser
 
 # Healthcheck.
-HEALTHCHECK --interval=30s --timeout=5s \
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s \
     CMD pgrep student_app || exit 1
 
+
 # Runtime behavior.
-ENTRYPOINT ["./build/student_app"]
+CMD ["./build/student_app"]
 

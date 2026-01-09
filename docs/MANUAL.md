@@ -17,12 +17,18 @@ The system supports:
 
 ---
 
-## Starting the Application
+### Running the Application
 
-Ensure the system is running:
+The system is designed to run in detached mode using Docker Compose.
+
 ```bash
 docker compose up -d
 docker compose run app
+```
+
+For interactive usage, attach to the running container:
+```bash
+docker exec -it student_app ./build/student_app
 ```
 
 ## Main Menu
