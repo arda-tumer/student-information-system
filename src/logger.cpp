@@ -8,5 +8,6 @@ void logMessage(const std::string &level, const std::string &message) {
     return;
 
   std::time_t now = std::time(nullptr);
-  logFile << "[" << std::ctime(&now) << "] " << "[" << level << "] " << message << "\n";
+  logFile << "[" << std::ctime(&now) << "] " << "[" << level << "] " << message
+          << "\n";
 }
