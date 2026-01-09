@@ -1,29 +1,81 @@
 version: "3.9"
 
 services:
+  # PostgreSQL Database Service.
   db:
-    build:
-      context: .
-      dockerfile: docker/Dockerfile.db
+    image: postgres:15-alpine
     container_name: postgres_db
+
+    # Environment variables.
     env_file:
       - docker/docker.env
-    volumes:
-      - db_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
 
+    # Data persistence.
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+    # Health check.
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+    restart: unless-stopped
+
+    labels:
+      - "service=database"
+      - "technology=postgresql"
+
+  # C++ Application Service.
   app:
     build:
       context: .
       dockerfile: docker/Dockerfile
-    container_name: cpp_app
+
+    container_name: student_app
+
+    # Service dependency.
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+
+    # Environment variables passed to C++.
     env_file:
       - docker/docker.env
 
+    # Provides interactive CLI.
+    stdin_open: true
+    tty: true
+    
+    # Security.
+    user: appuser
+    read_only: true
+    
+    tmpfs:
+    - /app/logs:rw,noexec,nosuid,size=64m    
+    
+    # Logs and behavior control.
+    restart: on-failure
+
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+
+    labels:
+      - "service=application"
+      - "language=c++"
+      - "course=system-programming"
+
+    # Resource limits.
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 512M
+
 volumes:
-  db_data:
-
-
+  postgres_data:

@@ -1,4 +1,8 @@
 .git
 .gitignore
+.github
+tests
+docs
+*.md
 build/
 

@@ -10,21 +10,35 @@ on:
       - main
       - develop
 jobs:
-
-  build:
-  
+  cpp-build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: C++ dependencies install
-      run: |
-        sudo apt update
-        sudo apt install -y g++ cmake libpqxx-dev
+      - name: Checkout repository 
+        uses: actions/checkout@v4
+   
+      - name: C++ dependencies install
+        run: |
+          sudo apt update
+          sudo apt install -y \
+            g++ \
+            cmake \
+            libpqxx-dev
 
-    - name: build C++ application
-      run: |
-        mkdir -p build
-        cd build
-        cmake ..
-        make
+      - name: Configure CMake
+        run: cmake -S . -B build
+
+      - name: Build C++ application
+        run: cmake --build build
+
+  docker-validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate docker-compose configuration
+        run: docker compose config
+
+        

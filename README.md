@@ -69,6 +69,7 @@ student-information-system/
 ├── CONTRIBUTING.md       # Contribution guidelines
 ├── docker-compose.yml    # Container orchestration
 ├── .dockerignore
+├── .env
 ├── LICENSE               # MIT License
 └── README.md             # Project overview
 ```
@@ -78,6 +79,8 @@ student-information-system/
 
 Additional documentation:
 - Contribution Guide: [CONTRIBUTING.md](https://github.com/arda-tumer/student-information-system/blob/main/docs/CONTRIBUTING.md)
+- Installation Guide: [INSTALL.md](https://github.com/arda-tumer/student-information-system/blob/main/docs/INSTALL.md)
+- User Manual: [MANUAL.md](https://github.com/arda-tumer/student-information-system/blob/main/docs/MANUAL.md)
 
 ---
 
