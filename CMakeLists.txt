@@ -9,6 +9,7 @@ add_executable(student_app
     src/Main.cpp
     src/database.cpp
     src/student.cpp
+    src/ui.cpp
 )
 
 target_link_libraries(student_app pqxx pq)
