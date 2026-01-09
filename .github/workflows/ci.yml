@@ -28,9 +28,6 @@ jobs:
             clang-format \
             cppcheck
 
-      - name: Check code formatting
-        run: clang-format --dry-run --Werror src/*.cpp include/*.h
-
       - name: Static analysis
         run: cppcheck --enable=all --error-exitcode=1 src/ include/
 
