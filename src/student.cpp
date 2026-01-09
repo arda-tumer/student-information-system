@@ -1,5 +1,6 @@
 #include "student.h"
 #include "logger.h"
+#include "database.h"
 #include <ctime>
 #include <fstream>
 #include <iostream>
