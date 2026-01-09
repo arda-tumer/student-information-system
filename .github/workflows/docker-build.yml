@@ -42,7 +42,7 @@ jobs:
             fi
             sleep 5
           done
-          echo "PostgreSQL failed to become healthy"
+          echo "Postgres failed to become healthy"
           docker compose logs
           exit 1
 
