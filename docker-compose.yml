@@ -46,9 +46,6 @@ services:
     env_file:
       - docker/docker.env
 
-    # Logs and behavior control.
-    restart: on-failure
-
     # Provides interactive CLI.
     stdin_open: true
     tty: true
@@ -56,6 +53,13 @@ services:
     # Security.
     user: appuser
     read_only: true
+    
+    tmpfs:
+    - /app/logs:rw,noexec,nosuid,size=64m    
+    
+    # Logs and behavior control.
+    restart: on-failure
+
     cap_drop:
       - ALL
     security_opt:

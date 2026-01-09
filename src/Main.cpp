@@ -1,8 +1,12 @@
 #include <iostream>
 #include "database.h"
 #include "student.h"
+#include "logger.h"
 
 int main() {
+
+    logMessage("INFO", "Application started");
+
     Database db;
     int choice;
 
