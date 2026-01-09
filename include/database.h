@@ -1,19 +1,19 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
-#include <pqxx/pqxx>
 #include <memory>
+#include <pqxx/pqxx>
 #include <string>
 
-class Database {
-private:
+class Database
+{
+  private:
     std::unique_ptr<pqxx::connection> conn;
     std::string connStr;
 
-public:
+  public:
     Database();
-    pqxx::connection& getConnection();
+    pqxx::connection &getConnection();
 };
 
 #endif
-

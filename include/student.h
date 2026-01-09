@@ -3,8 +3,9 @@
 
 #include "database.h"
 
-class StudentManager {
-public:
+class StudentManager
+{
+  public:
     static void addStudent(Database &db);
     static void listStudents(Database &db);
     static void updateStudent(Database &db);

@@ -1,16 +1,18 @@
-#include <iostream>
 #include "database.h"
-#include "student.h"
 #include "logger.h"
+#include "student.h"
+#include <iostream>
 
-int main() {
+int main()
+{
 
     logMessage("INFO", "Application started");
 
     Database db;
     int choice;
 
-    while (true) {
+    while (true)
+    {
         std::cout << "\n--- Student System ---\n";
         std::cout << "1. Add student\n";
         std::cout << "2. List students\n";
@@ -21,22 +23,28 @@ int main() {
 
         std::cin >> choice;
 
-        if (choice == 1) {
+        if (choice == 1)
+        {
             StudentManager::addStudent(db);
         }
-        else if (choice == 2) {
+        else if (choice == 2)
+        {
             StudentManager::listStudents(db);
         }
-        else if (choice == 3) {
+        else if (choice == 3)
+        {
             StudentManager::updateStudent(db);
         }
-        else if (choice == 4) {
+        else if (choice == 4)
+        {
             StudentManager::deleteStudent(db);
         }
-        else if (choice == 5) {
+        else if (choice == 5)
+        {
             break;
         }
-        else {
+        else
+        {
             std::cout << "Invalid option.\n";
         }
     }
