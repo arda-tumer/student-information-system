@@ -5,10 +5,10 @@
 
 class StudentManager {
 public:
-    static void addStudent(Database &db);
-    static void listStudents(Database &db);
-    static void updateStudent(Database &db);
-    static void deleteStudent(Database &db);
+  static void addStudent(Database &db);
+  static void listStudents(Database &db);
+  static void updateStudent(Database &db);
+  static void deleteStudent(Database &db);
 };
 
 #endif
