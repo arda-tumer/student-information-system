@@ -52,7 +52,7 @@ services:
     
     # Security.
     user: appuser
-    read_only: true
+    #    read_only: true
     
     tmpfs:
     - /app/logs:rw,noexec,nosuid,size=64m    
