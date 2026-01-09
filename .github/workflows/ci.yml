@@ -25,7 +25,7 @@ jobs:
             cmake \
             libpqxx-dev \
             libpq-dev \
-            clang-format \
+            clang-format
 
       - name: Configure CMake
         run: cmake -S . -B build
