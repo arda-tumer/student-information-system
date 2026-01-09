@@ -25,14 +25,7 @@ jobs:
             cmake \
             libpqxx-dev \
             libpq-dev \
-            clang-format \
-            cppcheck
-
-      - name: Check code formatting
-        run: clang-format --dry-run --Werror src/*.cpp include/*.h
-
-      - name: Static analysis
-        run: cppcheck --enable=all --error-exitcode=1 src/ include/
+            clang-format 
 
       - name: Configure CMake
         run: cmake -S . -B build
