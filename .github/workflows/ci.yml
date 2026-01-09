@@ -23,7 +23,9 @@ jobs:
           sudo apt install -y \
             g++ \
             cmake \
-            libpqxx-dev
+            libpqxx-dev \
+            libpq-dev \
+            clang-format
 
       - name: Configure CMake
         run: cmake -S . -B build

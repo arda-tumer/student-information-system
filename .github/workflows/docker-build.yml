@@ -1,4 +1,4 @@
-name: Docker Image Build
+name: Docker Image Build & Runtime Validation
 
 on:
   push:
@@ -32,10 +32,12 @@ jobs:
 
       - name: Check PostgreSQL health
         run: |
-          for i in {1..10}; do
-            STATUS=$(docker inspect --format='{{.State.Health.Status}}' postgres_db || echo "starting")
+          echo "Waiting for PostgreSQL health check..."
+          for i in {1..12}; do
+            STATUS=$(docker inspect --format='{{.State.Health.Status}}' postgres_db 2>/dev/null || echo "starting")
             echo "Postgres status: $STATUS"
             if [ "$STATUS" = "healthy" ]; then
+              echo "PostgreSQL is healthy"
               exit 0
             fi
             sleep 5
@@ -45,7 +47,8 @@ jobs:
           exit 1
 
       - name: Show container logs
-        run: docker compose logs
+        run: docker compose logs app
 
       - name: Shutdown containers
-        run: docker compose down
+        if: always()
+        run: docker compose down -v
