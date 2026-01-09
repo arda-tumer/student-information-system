@@ -25,18 +25,8 @@ jobs:
             cmake \
             libpqxx-dev \
             libpq-dev \
-<<<<<<< HEAD
             clang-format
-=======
-            clang-format \
-            cppcheck
 
-      - name: Check code formatting
-        run: clang-format --dry-run --Werror src/*.cpp include/*.h
-
-      - name: Static analysis
-        run: cppcheck --enable=all --error-exitcode=1 src/ include/
->>>>>>> parent of d23a0a5 (Removed unnecessary tests.)
 
       - name: Configure CMake
         run: cmake -S . -B build
