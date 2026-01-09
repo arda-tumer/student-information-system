@@ -23,7 +23,16 @@ jobs:
           sudo apt install -y \
             g++ \
             cmake \
-            libpqxx-dev
+            libpqxx-dev \
+            libpq-dev \
+            clang-format \
+            cppcheck
+
+      - name: Check code formatting
+        run: clang-format --dry-run --Werror src/*.cpp include/*.h
+
+      - name: Static analysis
+        run: cppcheck --enable=all --error-exitcode=1 src/ include/
 
       - name: Configure CMake
         run: cmake -S . -B build
