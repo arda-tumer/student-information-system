@@ -40,6 +40,8 @@ bool isValidEmail(const std::string &email) {
 
 void StudentManager::addStudent(Database &db) {
     try {
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // clear buffer
+
         std::string name, surname, department, email;
 
         std::cout << "Enter name: ";
@@ -57,6 +59,8 @@ void StudentManager::addStudent(Database &db) {
         if (isEmpty(name) || isEmpty(surname) ||
             isEmpty(department) || isEmpty(email)) {
             throw std::runtime_error("Fields cannot be empty");
+            logMessage("WARN", "Empty input detected");
+            return;
         }
 
         if (!isValidEmail(email)) {
@@ -115,6 +119,8 @@ void StudentManager::listStudents(Database &db) {
 
 void StudentManager::updateStudent(Database &db) {
     try {
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // clear buffer
+
         int id;
         std::string name, surname, department, email;
 
@@ -136,6 +142,8 @@ void StudentManager::updateStudent(Database &db) {
         if (isEmpty(name) || isEmpty(surname) ||
             isEmpty(department) || isEmpty(email)) {
             throw std::runtime_error("Fields cannot be empty");
+            logMessage("WARN", "Empty input detected");
+            return;
         }
 
         if (!isValidEmail(email)) {
