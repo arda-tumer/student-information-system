@@ -19,8 +19,7 @@ void logMessage(const std::string &level, const std::string &message) {
   char buf[32];
   std::strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", std::localtime(&now));
 
-  logFile << "[" << buf << "] "
-          << "[" << level << "] " << message << "\n";
+  logFile << "[" << buf << "] " << "[" << level << "] " << message << "\n";
 }
 
 /* ---------- Input Validation ---------- */
